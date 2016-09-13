@@ -7,48 +7,60 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cart.model.Item;
+import cart.service.impl.ShoppingCartServiceImpl;
 
 /**
  * Unit test for Shopping Cart.
  */
 public class ShoppingCartTest {
 
-	ShoppingCart cart;
-	ShoppingCartItem scCartItem;
-	Item apple;
-	Item orange;
+	ShoppingCartService cart;
 
 	@Before
 	public void setUp() {
-		cart = new ShoppingCart();
-		apple = new Item(1, "Apple", 0.20);
-		orange = new Item(1, "Orange", 0.20);
-		scCartItem = new ShoppingCartItem(apple);
-		scCartItem = new ShoppingCartItem(orange);
+		cart = new ShoppingCartServiceImpl();		
 	}
 
 	@Test
-	public void addOneItemIntoCart() {
+	public void testAddOneItemIntoCart() {
 
-		cart.addItem(apple);
+		cart.addItem(new Item(1, "Apple", 0.60, 1));
 		assertThat(cart.getItemCount(), is(1));
-		assertThat(cart.calculateTotalPrice(), is(0.20));
+		assertThat(cart.calculateTotalPrice(), is(0.60));
 	}
 
 	@Test
-	public void addMoreItemIntoCart() {
+	public void testAddMoreItemIntoCart() {
 
-		cart.addItem(apple);
-		cart.addItem(orange);
+		cart.addItem(new Item(1, "Apple", 0.60, 1));
+		cart.addItem(new Item(2, "Orange", 0.25, 1));
 		assertThat(cart.getItemCount(), is(2));
-		assertThat(cart.calculateTotalPrice(), is(0.4));
+		assertThat(cart.calculateTotalPrice(), is(0.85));
 	}
-	
-	@Test
-	public void clearCart() {
 
-		cart.addItem(apple);
-		cart.addItem(orange);
+	
+
+	@Test
+	public void test2For1Offer() {
+		cart.addItem(new Item(1, "Apple", 0.60, 2));
+		cart.addItem(new Item(1, "Apple", 0.60, 2));
+		assertThat(cart.getItemCount(), is(2));
+		assertThat(cart.calculateTotalPrice(), is(0.60));
+	}
+
+	@Test
+	public void test3For2Offer() {
+		cart.addItem(new Item(1, "Orange", 0.25, 3));
+		cart.addItem(new Item(2, "Orange", 0.25, 3));
+		cart.addItem(new Item(3, "Orange", 0.25, 3));
+		assertThat(cart.getItemCount(), is(3));
+		assertThat(cart.calculateTotalPrice(), is(0.50));
+	}
+	@Test
+	public void testClearCart() {
+
+		cart.addItem(new Item(1, "Apple", 0.60, 1));
+		cart.addItem(new Item(1, "Orange", 0.25, 1));
 		cart.clearCart();
 		assertThat(cart.getItemCount(), is(0));
 		assertThat(cart.calculateTotalPrice(), is(0.0));

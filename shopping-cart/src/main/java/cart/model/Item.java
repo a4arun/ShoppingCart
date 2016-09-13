@@ -1,35 +1,35 @@
 package cart.model;
 
 import java.io.Serializable;
+
 /**
  * Item model
- * 
- * @author Arun Pradhan
  *
+ * @author Arun Pradhan
  */
-public class Item implements Serializable{
+public class Item implements Serializable {
 
-	
 	private static final long serialVersionUID = -3584839686765253545L;
-	
+
 	private long id;
-	
+
 	private String name;
-	
+
 	private double price;
+
+	int discountCount;
 
 	public Item() {
 		super();
 	}
 
-	
-	public Item(long id, String name, double price) {
+	public Item(long id, String name, double price, int discountCount) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.discountCount = discountCount;
 	}
-
 
 	public long getId() {
 		return id;
@@ -53,5 +53,13 @@ public class Item implements Serializable{
 
 	public void setPrice(double price) {
 		this.price = price;
-	}	
+	}
+
+	public int getDiscountCount() {
+		return discountCount;
+	}
+
+	public void setDiscountCount(int discountCount) {
+		this.discountCount = discountCount;
+	}
 }

@@ -1,8 +1,10 @@
 package cart.service;
 
 import cart.model.Item;
+
 /**
  * This will select the Items and its quantity.
+ * 
  * @author Arun Pradhan
  *
  */
@@ -10,7 +12,7 @@ public class ShoppingCartItem {
 
 	private Item item;
 	private int quantity;
-	
+
 	public ShoppingCartItem(Item item) {
 		super();
 		this.item = item;
@@ -32,23 +34,24 @@ public class ShoppingCartItem {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
+
 	/**
 	 * Add items into Cart.
 	 */
-	public void increaseItems() {		
-		quantity ++;
+	public void increaseItems() {
+		quantity++;
 	}
-	
+
 	/**
 	 * Remove Items from the Cart.
 	 */
 	public void decreaseItems() {
-		quantity --;
+		quantity--;
 	}
-	
+
 	/**
 	 * Calculate the items and its total prices.
+	 * 
 	 * @return
 	 */
 	public double getTotalItemsPrice() {
